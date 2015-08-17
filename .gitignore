@@ -1,2 +1,11 @@
 #directories
 venv
+
+#MAC Util
+.DS_Store
+
+#Python Util
+*.pyc
+
+#Editor
+*.swp

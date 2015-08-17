@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from args import Args
+from app.args import Args
 
 def main():
     parser = Args()

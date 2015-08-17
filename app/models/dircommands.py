@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 import os
 import commands
-from exceptions.direxception import DirError
+from functools import wraps
+from app.exceptions.direxception import DirError
 from constants import PROJECT_LOCAL_PATH, PROJECT_REMOTE_PATH
 
 class DirCommands:
@@ -21,3 +22,4 @@ def atlocalproject(f):
             except DirError as e:
                 print "Directory Error: ,", e.output
         return f(*args, **kwargs)
+    return decorated

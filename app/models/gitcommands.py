@@ -2,12 +2,18 @@
 # -*- coding: utf-8 -*-
 import os
 import commands
-from constants import env, PROJECT_LOCAL_PATH, PROJECT_REMOTE_PATH
+from constants import CAEN_USER_DIRECTORY, PROJECT_LOCAL_PATH, PROJECT_REMOTE_PATH_GIT
 from app.exceptions.gitexception import GitError
 from app.models.dircommands import atlocalproject
-from fabric.api import run
+from fabric.api import run, cd
 
 class GitLocalCommands:
+
+    @staticmethod
+    def test():
+        (status, output) = commands.getstatusoutput("mkdir tmp")
+        if status != 0:
+            raise GitError(os.getcwd(), output)
 
     @staticmethod
     @atlocalproject
@@ -47,19 +53,24 @@ class GitLocalCommands:
 
 
 class GitRemoteCommands:
+
+    @staticmethod
+    def test():
+        with cd(CAEN_USER_DIRECTORY+"Documents"):
+            return run("ls")
     
     @staticmethod
     def pullBranch():
-        with cd(PROJECT_REMOTE_PATH):
+        with cd(PROJECT_REMOTE_PATH_GIT):
             run("git pull origin caencompile_submit")
 
     @staticmethod
     def checkoutCaenBranch():
-        with cd(PROJECT_REMOTE_PATH):
+        with cd(PROJECT_REMOTE_PATH_GIT):
             run("git checkout origin/caencompile_submit")
 
     @staticmethod
     def checkoutMaster():
-        with cd(PROJECT_REMOTE_PATH):
+        with cd(PROJECT_REMOTE_PATH_GIT):
             run("git checkout master")
 

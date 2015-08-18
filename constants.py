@@ -2,8 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import os
-from fabric.api import env
+from fabric.api import * 
 
+def getCaenDirect():
+    run("pwd")
+
+host = 'login.engin.umich.edu'
+user = 'haohuanw'
+passwords = '890922hH!@#'
 PROJECT_LOCAL_PATH = os.getcwd()
-PROJECT_REMOTE_PATH = "Documents/eecs482/"
-env.hosts = ['login.engin.umich.edu']
+CAEN_USER_DIRECTORY = "/afs/umich.edu/user/h/a/haohuanw/" 
+PROJECT_REMOTE_PATH_GIT = CAEN_USER_DIRECTORY+"Documents/eecs482/git/"
+PROJECT_REMOTE_PATH_UPLOADS = CAEN_USER_DIRECTORY+"Documents/eecs482/uploads/"

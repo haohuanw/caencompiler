@@ -4,7 +4,7 @@ import os
 import commands
 from functools import wraps
 from app.exceptions.direxception import DirError
-from constants import PROJECT_LOCAL_PATH, PROJECT_REMOTE_PATH
+from constants import PROJECT_LOCAL_PATH
 
 class DirCommands:
     @staticmethod

@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     double year = 0.0;
     //double remainder = 0.0;
     double balance=0.0;
-    monthPay = 5000;
-    interestRate = 0.2;
+    monthPay = 5;
+    interestRate = 0.1;
     int done = 0;
     while(done == 0){
         year = 10;

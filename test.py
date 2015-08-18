@@ -5,10 +5,9 @@
 from app.test.constantstest import constantsremotetest
 from fabric.api import *
 from constants import *
-
+from app.modes import gitmode
 def main():
-    # gitlocaltest()
-    constantsremotetest()
+    GitMode.compile("all","./proj1","proj1")
 
 if __name__ == '__main__':
     main()

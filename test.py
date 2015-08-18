@@ -5,7 +5,7 @@
 from app.test.constantstest import constantsremotetest
 from fabric.api import *
 from constants import *
-from app.modes import gitmode
+from app.modes.gitmode import GitMode
 def main():
     GitMode.compile("all","./proj1","proj1")
 

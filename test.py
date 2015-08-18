@@ -5,6 +5,7 @@ from app.test.gitlocaltest import gitlocaltest
 
 def main():
     gitlocaltest()
+    # test
 
 if __name__ == '__main__':
     main()

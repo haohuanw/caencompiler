@@ -5,6 +5,7 @@ import commands
 from constants import env, PROJECT_LOCAL_PATH, PROJECT_REMOTE_PATH
 from app.exceptions.gitexception import GitError
 from app.models.dircommands import atlocalproject
+from fabric.api import run
 
 class GitLocalCommands:
 
@@ -46,6 +47,19 @@ class GitLocalCommands:
 
 
 class GitRemoteCommands:
+    
+    @staticmethod
+    def pullBranch():
+        with cd(PROJECT_REMOTE_PATH):
+            run("git pull origin caencompile_submit")
 
-    def __init__(self):
-        pass
+    @staticmethod
+    def checkoutCaenBranch():
+        with cd(PROJECT_REMOTE_PATH):
+            run("git checkout origin/caencompile_submit")
+
+    @staticmethod
+    def checkoutMaster():
+        with cd(PROJECT_REMOTE_PATH):
+            run("git checkout master")
+

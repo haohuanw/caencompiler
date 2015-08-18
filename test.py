@@ -7,7 +7,7 @@ from fabric.api import *
 from constants import *
 from app.modes.gitmode import GitMode
 def main():
-    GitMode.compile("all","./proj1","proj1")
+    GitMode.compile("all","proj1","proj1")
 
 if __name__ == '__main__':
     main()

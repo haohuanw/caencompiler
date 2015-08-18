@@ -4,6 +4,7 @@
 from app.models.gitcommands import *
 from app.models.execommands import *
 from fabric.context_managers import *
+from constants import *
 
 class GitMode:
 

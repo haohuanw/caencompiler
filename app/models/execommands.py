@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from constants import PROJECT_REMOTE_PATH_GIT, PROJECT_REMOTE_PATH_UPLOADS
+from fabric.api import *
 
 class ExeCommands:
      

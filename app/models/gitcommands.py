@@ -67,7 +67,7 @@ class GitRemoteCommands:
     @staticmethod
     def checkoutCaenBranch():
         with cd(PROJECT_REMOTE_PATH_GIT):
-            run("git checkout origin/caencompile_submit")
+            run("git checkout origin/HEAD")
 
     @staticmethod
     def checkoutMaster():

@@ -16,10 +16,13 @@ class GitMode:
             GitRemoteCommands.pullBranch()
             GitRemoteCommands.checkoutCaenBranch()
             exe = ExeCommands(name, execution, subfolder, True) 
-            exe.make()
-            exe.execute()
+            makeresult = exe.make()
+            executeresult = exe.execute()
             GitRemoteCommands.checkoutMaster()
             
             GitLocalCommands.checkMaster()
             GitLocalCommands.deleteLocalBranch()
             GitLocalCommands.deleteRemoteBranch()
+
+            print makeresult
+            print executeresult

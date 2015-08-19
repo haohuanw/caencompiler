@@ -55,7 +55,7 @@ class GitCommands:
 
     @gitAtLocal
     def deleteLocalBranch(self):
-        GitLocalCommands.checkMaster()
+        self.checkLocalMaster()
         (status, output) = commands.getstatusoutput("git branch -D caencompile_submit")
         if status != 0:
             raise GitError(os.getcwd, output) 

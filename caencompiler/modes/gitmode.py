@@ -7,9 +7,9 @@ from caencompiler.models.execommands import *
 from fabric.context_managers import *
 
 class GitMode:
-    def __init__(self, localPath, remotePath, name, execution, subfolder):
+    def __init__(self, name, execution, subfolder, localPath, remotePath):
         self.G = GitCommands(localPath, remotePath)
-        self.exe = ExeCommands(name, execution, subfolder, True)
+        self.exe = ExeCommands(name, execution, subfolder, remotePath)
 
     def clearBranch(self):
         self.G.checkRemoteMaster()
@@ -18,7 +18,7 @@ class GitMode:
         self.G.deleteRemoteBranch()
 
     def compile(self, host, user, passwords):
-        with settings(host_string = self.host):
+        with settings(host_string = host):
 
             self.G.createLocalBranch()
             self.G.pushLocalBranch()

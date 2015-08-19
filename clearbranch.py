@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from app.modes.clearbranchmode import ClearBranchMode
+import yaml
+from caencompiler.modes.clearbranchmode import *
 
 def main():
-    ClearBranchMode.clearbranch()
+    stream = file('config.yaml','r')
+    config = yaml.load(stream)
+    clearBranch(config["PROJECT_LOCAL_PATH"], config["PROJECT_REMOTE_PATH_GIT"]) 
 
 if __name__ == "__main__":
     main()

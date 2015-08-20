@@ -3,8 +3,11 @@
 
 from caencompiler.models.gitcommands import *
 
-def clearBranch(localPath, remotePath):
-    g = GitCommands(localPath, remotePath)
-    g.checkLocalMaster()
-    g.deleteLocalBranch()
-    g.deleteRemoteBranch()
+class ClearBranchMode:
+    def __init__(self, localPath, remotePath):
+        self.g = GitCommands(localPath, remotePath)
+
+    def process(self):
+       self.g.checkLocalMaster()
+       self.g.deleteLocalBranch()
+       self.g.deleteRemoteBranch()

@@ -7,7 +7,7 @@ from caencompiler.modes.clearbranchmode import *
 def main():
     stream = file('config.yaml','r')
     config = yaml.load(stream)
-    clearBranch(config["PROJECT_LOCAL_PATH"], config["PROJECT_REMOTE_PATH_GIT"]) 
+    clearBranch(config["PROJECT_LOCAL_PATH"], config["PROJECT_REMOTE_PATH"]+"git/") 
 
 if __name__ == "__main__":
     main()

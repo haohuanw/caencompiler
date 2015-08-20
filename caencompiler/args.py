@@ -10,9 +10,10 @@ class Args:
 CAENCOMPILE
             
 Usage:
-caencompile.py gitrun [options] <name> [--exe=<execution>]
-caencompile.py uploadrun [options] <name> [--exe=<execution>] [<file>...]
-caencompile.py -h | --help
+caenpp gitload [options] <name> [<subfolder>] [--exe=<execution>]
+caenpp upload [options] <name> [<subfolder>] [--exe=<execution>] [<file>...]
+caenpp init
+caenpp -h | --help
 
 Options:
 -h --help               Show this screen.

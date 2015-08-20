@@ -35,6 +35,8 @@ class UploadCommands:
 
     @uploadAtLocal
     def transferFiles(self):
+        if not DirCommands.isRemoteDirectExist(self.remote):
+            raise DirError("Remote folder doesn't exist")
         for f in self.filelist:
             ret = put(self.local+f,self.remote+f)
             if not ret.succeeded:

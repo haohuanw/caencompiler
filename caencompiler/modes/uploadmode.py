@@ -13,17 +13,21 @@ class UploadMode:
 
     def compile(self, host, user, passwords):
         with settings(host_string = host):
-            self.up.transferFiles()
-            makeresult = self.exe.make()
-            if not makeresult.succeeded:
-                print makeresult
-                sys.exit(1)
+            self.process()
+    
+    def process(self):
+        self.up.transferFiles()
+        makeresult = self.exe.make()
+        if not makeresult.succeeded:
+            print makeresult
+            sys.exit(1)
 
-            executeresult = self.exe.execute()
-            if not executeresult.succeeded:
-                print makeresult
-                print executeresult
-                sys.exit(1)
-
+        executeresult = self.exe.execute()
+        if not executeresult.succeeded:
             print makeresult
             print executeresult
+            sys.exit(1)
+
+        print makeresult
+        print executeresult
+

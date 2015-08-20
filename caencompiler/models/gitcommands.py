@@ -8,19 +8,27 @@ from caencompiler.exceptions.gitexception import GitError
 from caencompiler.models.dircommands import DirCommands
 from fabric.api import run, cd
 
-# def atPath(path):
 def gitAtLocal(f):
     @wraps(f)
     def decorated(self, **kwargs):
         if os.getcwd() != self.local:
-            try:
-                DirCommands.enterDirAbs(self.local)
-            except DirError as e:
-                print "Directory Error: ,", e.output
+            if DirCommands.isLocalDirectExist(self.local):
+                try:
+                    DirCommands.enterDirAbs(self.local)
+                except DirError as e:
+                    print "Directory Error: ,", e.output
+            else:
+                raise GitError(self.local, "Local path not exist")
         return f(self, **kwargs)
     return decorated
-    # return decorator
 
+def gitAtRemote(f):
+    @wraps(f)
+    def decorated(self, **kwargs):
+        if not DirCommands.isRemoteDirectExist(self.remote):
+            raise GitError(self.remote, "Remote path not exist")
+        return f(self, **kwargs)
+    return decorated
 
 class GitCommands:
 
@@ -28,6 +36,7 @@ class GitCommands:
         self.local = localPath
         self.remote = remotePath
 
+    @gitAtLocal
     def testLocal(self):
         (status, output) = commands.getstatusoutput("mkdir tmp")
         if status != 0:
@@ -62,48 +71,42 @@ class GitCommands:
 
     @gitAtLocal
     def deleteRemoteBranch(self):
-        GitLocalCommands.checkMaster()
+        self.checkLocalMaster()
         (status, output) = commands.getstatusoutput("git push origin :caencompile_submit ")
         if status != 0:
             raise GitError(os.getcwd, output) 
 
+    @gitAtRemote
     def testRemote(self):
         with cd(self.remote):
             ret = run("ls")
-            if ret.succeeded:
-                return ret
-            else:
+            if not ret.succeeded:
                 raise GitError(self.remote, ret)
-    
+    @gitAtRemote 
     def pullRemoteBranch(self):
         with cd(self.remote):
             ret = run("git pull origin caencompile_submit")
-            if ret.succeeded:
-                return ret
-            else:
+            if not ret.succeeded:
                 self.checkLocalMaster()
                 self.createLocalBranch()
                 self.deleteRemoteBranch()
                 raise GitError(self.remote, ret)
 
+    @gitAtRemote
     def checkCaenBranch(self):
         with cd(self.remote):
             ret = run("git checkout origin/HEAD")
-            if ret.succeeded:
-                return ret
-            else:
+            if not ret.succeeded:
                 self.checkRemoteMaster()
                 self.checkLocalMaster()
                 self.createLocalBranch()
                 self.deleteRemoteBranch()
                 raise GitError(self.remote, ret)
 
-
+    @gitAtRemote
     def checkRemoteMaster(self):
         with cd(self.remote):
             ret = run("git checkout master")
-            if ret.succeeded:
-                return ret
-            else:
+            if not ret.succeeded:
                 raise GitError(self.remote, ret)
 

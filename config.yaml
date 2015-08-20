@@ -1,6 +1,6 @@
 PROJECT_LOCAL_PATH: /Users/haohuanw/Documents/forfun/caencompiler/
-PROJECT_REMOTE_PATH_GIT: /afs/umich.edu/user/h/a/haohuanw/Documents/eecs482/git/
-PROJECT_REMOTE_PATH_UPLOADS: /afs/umich.edu/user/h/a/haohuanw/Documents/eecs482/uploads/
-host: login.engin.umich.edu
-passwords: 890922hH!@#
-user: haohuanw
+PROJECT_REMOTE_PATH: /Users/haohuanw/caen/
+GITHUB_ADDR: https://github.com/haohuanw/caencompiler.git
+HOST: localhost 
+USER: haohuanw
+PASSWORDS: 890922hH!@#

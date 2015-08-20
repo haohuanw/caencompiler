@@ -19,25 +19,28 @@ class GitMode:
 
     def compile(self, host, user, passwords):
         with settings(host_string = host):
-
-            self.G.createLocalBranch()
-            self.G.pushLocalBranch()
-            self.G.pullRemoteBranch()
-            self.G.checkCaenBranch()
+            self.process()
             
-            makeresult = self.exe.make()
-            if not makeresult.succeeded:
-                self.clearBranch()
-                print makeresult
-                sys.exit(1)
-
-            executeresult = self.exe.execute()
-            if not executeresult.succeeded:
-                self.clearBranch()
-                print makeresule
-                print executeresult
-                sys.exit(1)
-
+    def process(self):
+        self.G.createLocalBranch()
+        self.G.pushLocalBranch()
+        self.G.pullRemoteBranch()
+        self.G.checkCaenBranch()
+        
+        makeresult = self.exe.make()
+        if not makeresult.succeeded:
             self.clearBranch()
             print makeresult
+            sys.exit(1)
+
+        executeresult = self.exe.execute()
+        if not executeresult.succeeded:
+            self.clearBranch()
+            print makeresule
             print executeresult
+            sys.exit(1)
+
+        self.clearBranch()
+        print makeresult
+        print executeresult
+

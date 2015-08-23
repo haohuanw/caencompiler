@@ -13,10 +13,7 @@ def gitAtLocal(f):
     def decorated(self, **kwargs):
         if os.getcwd() != self.local:
             if DirCommands.isLocalDirectExist(self.local):
-                try:
-                    DirCommands.enterDirAbs(self.local)
-                except DirError as e:
-                    print "Directory Error: ,", e.output
+                DirCommands.enterDirAbs(self.local)
             else:
                 raise GitError(self.local, "Local path not exist")
         return f(self, **kwargs)

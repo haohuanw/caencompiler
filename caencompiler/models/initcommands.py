@@ -8,15 +8,14 @@ from caencompiler.exceptions.gitexception import GitError
 
 class InitCommands:
     remote = ""
-    def __init__(self, gitaddr):
+    def __init__(self):
         if len(InitCommands.remote) == 0:
-            raise DirError('Create InitCommands Failed, dont have valid path')
-        self.gitAddr = gitaddr 
+            raise DirError('Create InitCommands Failed, dont have valid remote path in config.yaml')
 
     def createFolders(self):
         direct = InitCommands.remote
-        if direct.endswith('/'):
-            direct = direct[:len(direct)-1]
+        # if direct.endswith('/'):
+        direct = direct[:len(direct)-1]
         createProcess = []
         while len(direct) > 0:
             if DirCommands.isRemoteDirectExist(direct):
@@ -40,20 +39,21 @@ class InitCommands:
                 else:
                     direct += '/' + createProcess.pop()
         
-    def cloneGit(self):
-        if DirCommands.isRemoteDirectExist(InitCommands.remote+'git/') and \
-                DirCommands.isRemoteDirectExist(InitCommands.remote+'uploads/'):
-            return
-        elif DirCommands.isRemoteDirectExist(InitCommands.remote):
+    def cloneGit(self, gitAddr):
+        if DirCommands.isRemoteDirectExist(InitCommands.remote):
             with cd(InitCommands.remote):
-                ret = run("git clone %s git" % self.gitAddr)
+                ret = run("git clone %s git" % gitAddr)
                 if not ret.succeeded:
                     raise GitError(InitCommands.remote, ret)
+
+    def cpUpload(self, localAddr):
+        if DirCommands.isRemoteDirectExist(InitCommands.remote):
+            with cd(InitCommands.remote):
                 ret = run("mkdir uploads")
                 if not ret.succeeded:
-                    raise GitError(InitCommands.remote, ret)
-                ret = run("cp -r git/ uploads/")
+                    raise DirError("Failed to create uploads folder")
+                ret = put(localAddr+'*', InitCommands.remote+'uploads/')
                 if not ret.succeeded:
-                    raise GitError(InitCommands.remote, ret)
+                    raise DirError("Failed to upload files")
 
 

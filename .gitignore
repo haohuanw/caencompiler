@@ -9,3 +9,7 @@ venv
 
 #Editor
 *.swp
+
+#Python egg info
+caenpp
+*.egg-info

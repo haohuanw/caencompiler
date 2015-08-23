@@ -12,7 +12,7 @@ CAENCOMPILE
 Usage:
 caenpp gitload [options] <name> [<subfolder>] [--exe=<execution>]
 caenpp upload [options] <name> [<subfolder>] [--exe=<execution>] [<file>...]
-caenpp init
+caenpp init [options] (gitload|upload)
 caenpp -h | --help
 
 Options:
@@ -22,5 +22,5 @@ Options:
 --exe=<execution>       Args for <name> program.
         """
 
-        self.args = docopt(self.docs, version='CAENCOMPILE 1.0')
+        self.args = docopt(self.docs, version='CAENCOMPILER 1.0')
 

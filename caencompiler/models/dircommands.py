@@ -6,6 +6,14 @@ from fabric.contrib import files
 from caencompiler.exceptions.direxception import DirError
 
 class DirCommands:
+    
+    @staticmethod
+    def isUploadInit(direct):
+        return DirCommands.isRemoteDirectExist(direct+'uploads/')
+
+    @staticmethod
+    def isGitInit(direct):
+        return DirCommands.isRemoteDirectExist(direct+'git/')
 
     @staticmethod
     def isLocalDirectExist(direct):

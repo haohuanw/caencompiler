@@ -8,13 +8,13 @@ from caencompiler.modes.gitmode import GitMode
 from caencompiler.modes.initmode import InitMode
 
 def main():
+    parser = Args()
     try:
         stream = file('config.yaml', 'r')
         config = yaml.load(stream)
     except:
         print "Cannot Open file"
         raise
-    parser = Args()
     remotePath = makeGoodPath(config["PROJECT_REMOTE_PATH"])
     localPath = makeGoodPath(config["PROJECT_LOCAL_PATH"])
     if parser.args['init']:
